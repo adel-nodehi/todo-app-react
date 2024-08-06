@@ -1,14 +1,22 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "./todoSlice";
 
 function Form({ handleAdd }) {
+  const dispatch = useDispatch();
+
   const [todoTitle, setTodoTitle] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (todoTitle === "") return;
+    if (todoTitle === "") {
+      alert("put something in the todo field");
+      return;
+    }
 
-    handleAdd(todoTitle);
+    dispatch(addTodo({ title: todoTitle }));
+
     setTodoTitle("");
   }
 
