@@ -1,6 +1,6 @@
 # TODO App
 
-This is a todo list project with react.
+This is a todo list project with react, vite, redux toolkit.
 
 ## How it's run
 
