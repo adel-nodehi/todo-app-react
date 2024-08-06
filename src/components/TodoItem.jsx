@@ -1,7 +1,12 @@
 import { useState } from "react";
-import Button from "./Button.jsx";
+import { useDispatch } from "react-redux";
 
-function TodoItem({ todoData, handleDelete, handleEdit, handleComplite }) {
+import Button from "./Button.jsx";
+import { completeTodo, deleteTodo, editTodo } from "./todoSlice.js";
+
+function TodoItem({ todoData }) {
+  const dispatch = useDispatch();
+
   const [isEditing, setIsEditing] = useState(false);
   const [todoTitle, setTodoTitle] = useState("");
 
@@ -11,13 +16,13 @@ function TodoItem({ todoData, handleDelete, handleEdit, handleComplite }) {
       return;
     }
 
-    handleEdit(todoData.id, todoTitle);
+    dispatch(editTodo({ id: todoData.id, title: todoTitle }));
 
     setIsEditing((cur) => !cur);
   }
 
   return (
-    <li className={`todo-item ${todoData.complited ? "completed" : ""}`}>
+    <li className={`todo-item ${todoData.completed ? "completed" : ""}`}>
       {isEditing ? (
         <input
           type="text"
@@ -45,14 +50,14 @@ function TodoItem({ todoData, handleDelete, handleEdit, handleComplite }) {
 
             <Button
               className="delete-button"
-              onClick={() => handleDelete(todoData.id)}
+              onClick={() => dispatch(deleteTodo(todoData.id))}
             >
               Delete
             </Button>
 
             <Button
               className="complete-button"
-              onClick={() => handleComplite(todoData.id)}
+              onClick={() => dispatch(completeTodo(todoData.id))}
             >
               Complete
             </Button>
