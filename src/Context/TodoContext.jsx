@@ -92,7 +92,7 @@ function TodoProvider({ children }) {
 function useTodo() {
   const state = useContext(TodoContext);
   if (state === undefined)
-    throw new Error("TodoContext used outside of TodoProvider");
+    throw new Error("can't use TodoContext outside of TodoProvider");
   return state;
 }
 
